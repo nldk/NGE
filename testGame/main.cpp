@@ -13,7 +13,6 @@ void onCollision(Sprite* other) {
     std::cout << "Collision with " << other->name << std::endl;
 }
 
-
 int main() {
 
     {
@@ -63,4 +62,3 @@ int main() {
     exitRenderer();
     return 0;
 }
-
