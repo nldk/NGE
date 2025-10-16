@@ -1,25 +1,26 @@
 #ifndef NGE_EVENT_HANDELING_H
 #define NGE_EVENT_HANDELING_H
 
+#include <vector>
 #include <SDL2/SDL.h>
+#include "sprite.h"
+
 
 class EventHandeler {
 public:
+    std::vector<Sprite*> sprites;
     EventHandeler() = default;
     ~EventHandeler() = default;
-
-    // Poll and pump SDL events; updates internal quit flag
-    void pump();
-
-    // True if a quit event was received (window close or ESC)
+    void update();
+    void updateEvents();
+    void updateCollisions();
     bool isQuitEvent() const { return quit; }
-
-    // Returns whether a given scancode is currently pressed
     bool isKeyPressed(SDL_Scancode sc) const;
+
 
 private:
     bool quit = false;
 };
 
-#endif // NGE_EVENT_HANDELING_H
+#endif
 

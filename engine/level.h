@@ -2,6 +2,8 @@
 #define NGE_LEVEL_H
 #include <vector>
 #include "sprite.h"
+
+// Not working yet
 class Level {
 public:
     std::vector<Sprite*> sprites;
@@ -14,8 +16,5 @@ public:
     void render(Scene* scene);
     void loadLevel();
 };
-
-
-
 
 #endif

@@ -1,7 +1,8 @@
 #include "sprite.h"
 #include "vec2.h"
 #include <SDL2/SDL_image.h>
-Sprite::Sprite(Texture* texture, float x, float y, int width, int height) {
+Sprite::Sprite(std::string name,Texture* texture, float x, float y, int width, int height) {
+    this->name = name;
     this->texture = texture;
     this->pos = Vec2(x, y);
     this->width = width;
@@ -22,15 +23,12 @@ Error Sprite::drawSprite(Scene* scene) const {
         return Error(true, "Invalid sprite or texture dimensions");
     }
 
-    // For each destination pixel in the sprite, sample the corresponding source pixel
-    // from the texture using nearest-neighbor scaling.
+
     for (int dy = 0; dy < this->height; dy++) {
         int screen_y = static_cast<int>(this->pos.y) + dy;
         if (screen_y < 0 || screen_y >= scene->window->height) continue;
 
-        // Compute source y once per row
         int src_y = static_cast<int>((static_cast<long long>(dy) * this->texture->height) / this->height);
-        // Clamp just in case of rounding edge
         if (src_y >= this->texture->height) src_y = this->texture->height - 1;
 
         for (int dx = 0; dx < this->width; dx++) {
@@ -40,7 +38,6 @@ Error Sprite::drawSprite(Scene* scene) const {
             int src_x = static_cast<int>((static_cast<long long>(dx) * this->texture->width) / this->width);
             if (src_x >= this->texture->width) src_x = this->texture->width - 1;
 
-            // Correct indexing: use texture->width for source stride
             Uint32 src_pixel = this->texture->data[src_y * this->texture->width + src_x];
             scene->pixels[screen_y * scene->window->width + screen_x] = src_pixel;
         }
@@ -85,10 +82,11 @@ Error Texture::load(const std::string& path) {
     return Error(false, "No Error");
 }
 
-bool Sprite::boxColide(Sprite *sprite) {
-    float disx = fabs(this->pos.x - sprite->pos.x);
-    float disy = fabs(this->pos.y - sprite->pos.y);
-    return (disx < sprite->width +this->width && disy < sprite->height+this->height);
+bool Sprite::boxCollide(Sprite *sprite) {
+    return !(this->pos.x + this->width < sprite->pos.x ||
+             this->pos.x > sprite->pos.x + sprite->width ||
+             this->pos.y + this->height < sprite->pos.y ||
+             this->pos.y > sprite->pos.y + sprite->height);
 }
 
 bool Sprite::boxCollide(int x, int y, int w, int h) {
