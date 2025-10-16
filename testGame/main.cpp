@@ -33,7 +33,7 @@ int main() {
         }
         int spriteW = 200;
         int spriteH = 200;
-        Sprite sprite = Sprite("key",&textureKey, 0, 0, spriteW, spriteH);
+        Sprite sprite = Sprite("pipe",&textureKey, 0, 0, spriteW, spriteH);
         Sprite padle = Sprite("padel",&texturePable, 400, 400, spriteW, spriteH);
         sprite.setOnCollision(onCollision);
         eventHandeler.sprites.push_back(&sprite);
