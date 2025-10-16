@@ -1,6 +1,6 @@
 # NGE
 
-**NGE** is a C++ game engine project.  
+**NielGamingEngine** is a C++ game engine project.  
 This engine provides core systems for building simple games (rendering, input, etc.).  
 
 ---
