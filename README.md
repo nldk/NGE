@@ -7,24 +7,28 @@ This engine provides core systems for building simple games (rendering, input, e
 
 ## 📁 Repository Structure
 
-- `engine/` — the core engine code  
-- `testGame/` — a sample application or testbed using the engine  
+
+- `engine/` — main engine source code  
+- `testGame/` — a small game or demo showcasing the engine  
 - `CMakeLists.txt` — build configuration  
 
 ---
 
-## 🛠️ Requirements & Dependencies
+## 🛠️ Requirements
 
-- A C++17-compatible compiler (or above)  
-- CMake (version ≥ 3.x)  
-- [Any additional libs you use — e.g. SDL2, OpenGL, GLM, etc.] — specify here  
+- **C++26** compiler support  
+  - GCC 14+  
+  - Clang 18+  
+  - MSVC (Visual Studio 2025 or newer with `/std:c++latest`)  
+- **CMake 3.28+**  
+- (Optional) dependencies like SDL2, OpenGL/Vulkan, GLM, stb_image, etc.
 
 ---
 
-## 🚀 Building & Running
+## 🚀 Build Instructions
 
-1. Clone the repo:
-
+1. **Clone the repository**
    ```bash
    git clone https://github.com/nldk/NGE.git
    cd NGE
+
