@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 26)
 # Find SDL2 and SDL2_image
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
 # Include directories for our engine headers
 include_directories(
@@ -27,6 +28,8 @@ add_library(NGE STATIC
         engine/eventHandeling.cpp
         engine/eventHandeling.h
         engine/json.hpp
+        engine/sound.cpp
+        engine/sound.h
 )
 
 # Link SDL2 and SDL2_image to NGE as PUBLIC so dependents inherit them
@@ -35,6 +38,7 @@ target_link_libraries(NGE
         PUBLIC
         SDL2::SDL2
         SDL2_image::SDL2_image
+        SDL2_mixer::SDL2_mixer
 )
 
 # Build executable

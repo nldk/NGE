@@ -6,6 +6,7 @@
 #include "../engine/sprite.h"
 #include "../engine/eventHandeling.h"
 #include  "../engine/level.h"
+#include "../engine/sound.h"
 #include <SDL.h>
 
 #define WIDTH 1080
@@ -96,6 +97,7 @@ void leveltestSave() {
         SDL_Delay(2000);
     }
 }
+
 void leveltestLoad() {
     {
         Window win = Window(WIDTH, HEIGHT, "Test Game");
@@ -119,20 +121,19 @@ void leveltestLoad() {
     }
 }
 
-void sandBoxGame() {
-    {
+void sandBoxGame() { {
         int name = 0;
         bool running = true;
         Window win = Window(WIDTH, HEIGHT, "sandy Game");
         Scene scene = Scene(&win, Color(0, 0, 0, win.screen->format), WIDTH, HEIGHT);
         Camera camera = Camera(0, 0, WIDTH, HEIGHT, &scene);
-        std::vector<Sprite*> sprites;
+        std::vector<Sprite *> sprites;
         Level level = Level(sprites, "sandBoxLevel.json");
         Texture textureSand = Texture();
         EventHandeler eventHandeler = EventHandeler();
         eventHandeler.onQuit = [&running,&name]() {
             running = false;
-            std::cout <<name << std::endl;
+            std::cout << name << std::endl;
         };
         auto err = textureSand.load("../testGame/textures/padel.png");
         if (err.error) {
@@ -141,7 +142,8 @@ void sandBoxGame() {
         while (running) {
             eventHandeler.update();
             if (eventHandeler.isMousePressed(1)) {
-                Sprite* sprite =new Sprite("sprite "+ name,&textureSand, eventHandeler.mouseX - 25, eventHandeler.mouseY - 25, 50, 50);
+                Sprite *sprite = new Sprite("sprite " + name, &textureSand, eventHandeler.mouseX - 25,
+                                            eventHandeler.mouseY - 25, 50, 50);
                 level.addSprite(sprite);
                 name++;
             }
@@ -153,8 +155,8 @@ void sandBoxGame() {
     }
     exitRenderer();
 }
-void photoViewer(std::string path) {
 
+void photoViewer(std::string path) {
     //std::cout << path << std::endl;
     bool running = true;
     Texture texturePhoto = Texture();
@@ -162,17 +164,17 @@ void photoViewer(std::string path) {
     if (err.error) {
         std::cout << "Texture load failed! " << err.message << std::endl;
     }
-    float aspect = (float)texturePhoto.width / (float)texturePhoto.height;
+    float aspect = (float) texturePhoto.width / (float) texturePhoto.height;
     int width = texturePhoto.width;
     int height = texturePhoto.height;
-    double scaleX = (double)3000 / width;
-    double scaleY = (double)2000 / height;
+    double scaleX = (double) 3000 / width;
+    double scaleY = (double) 2000 / height;
     double scale = std::min(scaleX, scaleY); // keep aspect ratio
     int newWidth = static_cast<int>(width * scale);
     int newHeight = static_cast<int>(height * scale);
 
-    Window win = Window( newWidth,newHeight,"Photo Viewer");
-    Scene scene = Scene(&win, Color(0, 0, 0, win.screen->format), newWidth,newHeight);
+    Window win = Window(newWidth, newHeight, "Photo Viewer");
+    Scene scene = Scene(&win, Color(0, 0, 0, win.screen->format), newWidth, newHeight);
     Camera camera = Camera(0, 0, newWidth, newHeight, &scene);
     EventHandeler eventHandeler = EventHandeler();
     eventHandeler.onQuit = [&running]() {
@@ -188,13 +190,26 @@ void photoViewer(std::string path) {
         SDL_Delay(50);
     }
 }
-int main(int argc, char* argv[]) {
+
+void soundTest() {
+    SoundManager soundManager = SoundManager();
+    auto err = soundManager.playMusic("../testGame/sound/blue.mp3", 0);
+    if (err.error) {
+        std::cout << "Sound play failed! " << err.message << std::endl;
+    }
+    SDL_Delay(10000);
+}
+
+int main(int argc, char *argv[]) {
+    soundTest();
+    /*
     if (argc < 2) {
         std::cout << "Usage: photoViewer <image_path>" << std::endl;
         return 1;
     }
     std::cout << argv[1] << std::endl;
     photoViewer(argv[1]);
+    */
     //sandBoxGame();
     //leveltestSave();
     //leveltestLoad();
