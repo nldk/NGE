@@ -31,4 +31,4 @@ This engine provides core systems for building simple games (rendering, input, e
    ```bash
    git clone https://github.com/nldk/NGE.git
    cd NGE
-
+2. **Make sure SDL2, SDL2 image and SDL mexer is linked**
