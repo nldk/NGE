@@ -21,7 +21,7 @@ This engine provides core systems for building simple games (rendering, input, e
   - Clang 18+  
   - MSVC (Visual Studio 2025 or newer with `/std:c++latest`)  
 - **CMake 3.28+**  
-- (Optional) dependencies like SDL2, OpenGL/Vulkan, GLM, stb_image, etc.
+- SDL2, SDL2_image, SDL2_mixer
 
 ---
 
