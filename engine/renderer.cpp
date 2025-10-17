@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <iostream>
 #include <SDL_image.h>
 
 Window::Window(int width, int height, std::string title) {

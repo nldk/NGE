@@ -9,6 +9,7 @@
 
 class Texture {
 public:
+  std::string path = "";
   Uint32* data;
   int width;
   int height;

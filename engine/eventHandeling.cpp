@@ -3,6 +3,7 @@
 void EventHandeler::update() {
     this->updateCollisions();
     this->updateEvents();
+    this->updateMousePosition();
 }
 
 bool EventHandeler::isKeyPressed(SDL_Scancode sc) const {
@@ -32,4 +33,18 @@ void EventHandeler::updateEvents() {
             quit = true;
         }
     }
+    if (this->quit && this->onQuit) {
+        this->onQuit();
+    }
+}
+void EventHandeler::updateMousePosition() {
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    this->mouseX = x;
+    this->mouseY = y;
+}
+
+bool EventHandeler::isMousePressed(int button) const {
+    Uint32 buttons = SDL_GetMouseState(nullptr, nullptr);
+    return (buttons & SDL_BUTTON(button)) != 0;
 }

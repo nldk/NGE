@@ -2,19 +2,19 @@
 #define NGE_LEVEL_H
 #include <vector>
 #include "sprite.h"
-
-// Not working yet
+#include "json.hpp"
+#include <fstream>
 class Level {
 public:
+    std::string name;
     std::vector<Sprite*> sprites;
-    Level(std::vector<Sprite*> &sprites);
-    ~Level() {
-        for (auto obj : this->sprites)
-            delete obj;
-    };
+    Level(std::vector<Sprite*> &sprites,std::string name);
+    ~Level() = default;
     void addSprite(Sprite* sprite);
     void render(Scene* scene);
-    void loadLevel();
+    Error loadLevel();
+    void saveLevel();
+
 };
 
 #endif

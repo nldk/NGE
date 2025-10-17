@@ -26,6 +26,7 @@ add_library(NGE STATIC
         engine/level.h
         engine/eventHandeling.cpp
         engine/eventHandeling.h
+        engine/json.hpp
 )
 
 # Link SDL2 and SDL2_image to NGE as PUBLIC so dependents inherit them

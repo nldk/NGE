@@ -79,6 +79,7 @@ Error Texture::load(const std::string& path) {
     this->width = converted->w;
     this->height = converted->h;
     SDL_FreeSurface(converted);
+    this->path = path;
     return Error(false, "No Error");
 }
 
