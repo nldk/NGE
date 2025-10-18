@@ -1,4 +1,7 @@
 #include "sprite.h"
+
+#include <cstring>
+
 #include "vec2.h"
 #include <SDL2/SDL_image.h>
 Sprite::Sprite(std::string name,Texture* texture, float x, float y, int width, int height) {
@@ -54,7 +57,7 @@ Texture::Texture(Uint32* data, int width, int height) {
     this->width = width;
     this->height = height;
     this->data = new Uint32[width * height];
-    memcpy(this->data, data, width * height * sizeof(Uint32));
+    std::memcpy(this->data, data, width * height * sizeof(Uint32));
 }
 Error Texture::load(const std::string& path) {
     auto init = IMG_Init(0);

@@ -1,6 +1,8 @@
 #ifndef NGE_VEC2_H
 #define NGE_VEC2_H
 
+#include <cmath>
+
 class Vec2 {
 public:
     float x, y;

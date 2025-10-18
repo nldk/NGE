@@ -1,11 +1,10 @@
 #ifndef NGE_SPRITE_H
 #define NGE_SPRITE_H
 #include <functional>
-#include <SDL_stdinc.h>
 #include "renderer.h"
 #include "vec2.h"
 #include "error.h"
-#include <SDL2/SDL_image.h>
+#include "nge.h"
 
 class Texture {
 public:

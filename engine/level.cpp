@@ -53,7 +53,7 @@ Error Level::loadLevel() {
         );
         this->sprites.push_back(sprite);
     }
-
+    return Error(false, "No error");
 }
 std::string concatTextures(Uint32* data,int length, int width) {
     std::string dataString = "";

@@ -1,7 +1,7 @@
 #ifndef NGE_RENDERER_H
 #define NGE_RENDERER_H
 #include <string>
-#include <SDL2/SDL.h>
+#include "nge.h"
 #include "vec2.h"
 #include "color.h"
 

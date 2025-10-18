@@ -7,7 +7,8 @@
 #include "../engine/eventHandeling.h"
 #include  "../engine/level.h"
 #include "../engine/sound.h"
-#include <SDL.h>
+
+// SDL is included transitively via engine headers (nge.h). No direct include needed here.
 
 #define WIDTH 1080
 #define HEIGHT 720
@@ -201,7 +202,7 @@ void soundTest() {
 }
 
 int main(int argc, char *argv[]) {
-    soundTest();
+    //soundTest();
     /*
     if (argc < 2) {
         std::cout << "Usage: photoViewer <image_path>" << std::endl;
@@ -210,7 +211,7 @@ int main(int argc, char *argv[]) {
     std::cout << argv[1] << std::endl;
     photoViewer(argv[1]);
     */
-    //sandBoxGame();
+    sandBoxGame();
     //leveltestSave();
     //leveltestLoad();
     return 0;

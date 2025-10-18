@@ -2,14 +2,14 @@
 #define NGE_EVENT_HANDELING_H
 
 #include <vector>
-#include <SDL2/SDL.h>
+#include "nge.h"
 #include "sprite.h"
 
 
 class EventHandeler {
 public:
-    int mouseX;
-    int mouseY;
+    int mouseX = 0;
+    int mouseY = 0;
     std::vector<Sprite*> sprites;
     std::function<void()> onQuit;
     EventHandeler() = default;
@@ -18,12 +18,12 @@ public:
     void updateEvents();
     void updateCollisions();
     void updateMousePosition();
-    bool isQuitEvent() const { return quit; }
-    bool isKeyPressed(SDL_Scancode sc) const;
-    std::pair<int,int> mousPosition() const {
+    [[nodiscard]] bool isQuitEvent() const { return quit; }
+    [[nodiscard]] bool isKeyPressed(SDL_Scancode sc) const;
+    [[nodiscard]] std::pair<int,int> mousPosition() const {
         return {this->mouseX, this->mouseY};
     }
-    bool isMousePressed(int button) const;
+    [[nodiscard]] bool isMousePressed(int button) const;
     void cleanupSprites() {
         for (auto& sprite : sprites) {
             delete sprite;
@@ -35,4 +35,3 @@ private:
 };
 
 #endif
-
