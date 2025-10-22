@@ -1,6 +1,6 @@
 #ifndef NGE_COLOR_H
 #define NGE_COLOR_H
-#include "nge.h"
+#include <SDL2/SDL.h>
 
 class Color {
     public:

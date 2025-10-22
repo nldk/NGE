@@ -21,21 +21,18 @@ add_library(NGE STATIC
 
 # --- Include your engine and SDL headers ---
 # Public include directories split for build vs install (so exported config is relocatable)
+# Build with in-repo headers; installed packages will include headers under include/NGE
+# Note: bundled SDL headers (if needed) live under engine/SDL* during build
+# and are shipped under include/NGE after install (from release-headers/)
+# Consumers should include headers as <NGE/...>, therefore export include/ as the root.
+# so a single INSTALL_INTERFACE is sufficient.
 target_include_directories(NGE
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/engine>
-        $<INSTALL_INTERFACE:include/NGE>
-)
-
-# If you need to expose bundled SDL headers during build (they live in the repo),
-# add them only to the BUILD_INTERFACE so they won't become absolute paths in the
-# installed target's INTERFACE_INCLUDE_DIRECTORIES. The installed headers will
-# be available under include/NGE because we install the engine/ directory.
-target_include_directories(NGE
-        PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/SDL/include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/SDL_image/include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/SDL_mixer/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/engine/SDL/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/engine/SDL_image/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/engine/SDL_mixer/include>
+        $<INSTALL_INTERFACE:include>
 )
 
 # --- Link SDL2 so anything using NGE automatically inherits it ---
@@ -63,10 +60,12 @@ install(TARGETS NGE
         INCLUDES DESTINATION include
 )
 
-# Install headers (install the engine headers as public API)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/engine/
+# Install public headers from release-headers/ so consumers include <NGE/...>
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/release-headers/
         DESTINATION include/NGE
-        FILES_MATCHING PATTERN "*.h"
+        FILES_MATCHING
+            PATTERN "*.h"
+            PATTERN "*.hpp"
 )
 
 # Export the targets file

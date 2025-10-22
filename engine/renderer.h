@@ -1,9 +1,10 @@
 #ifndef NGE_RENDERER_H
 #define NGE_RENDERER_H
 #include <string>
-#include "nge.h"
-#include "vec2.h"
+#include <SDL2/SDL.h>
+
 #include "color.h"
+#include "vec2.h"
 
 void exitRenderer();
 

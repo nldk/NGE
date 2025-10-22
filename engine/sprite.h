@@ -1,10 +1,12 @@
 #ifndef NGE_SPRITE_H
 #define NGE_SPRITE_H
 #include <functional>
-#include "renderer.h"
+#include <string>
+#include <SDL2/SDL.h>
 #include "vec2.h"
 #include "error.h"
-#include "nge.h"
+
+class Scene; // forward declaration
 
 class Texture {
 public:

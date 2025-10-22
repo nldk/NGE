@@ -1,6 +1,5 @@
 #include "sound.h"
 
-
 SoundManager::SoundManager() {
     if (!(SDL_WasInit(SDL_INIT_AUDIO) & SDL_INIT_AUDIO)) {
         SDL_Init(SDL_INIT_AUDIO);

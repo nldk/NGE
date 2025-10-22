@@ -4,6 +4,9 @@
 
 #include "vec2.h"
 #include <SDL2/SDL_image.h>
+
+#include "renderer.h"
+
 Sprite::Sprite(std::string name,Texture* texture, float x, float y, int width, int height) {
     this->name = name;
     this->texture = texture;
@@ -16,7 +19,7 @@ Error Sprite::drawSprite(Scene* scene) const {
     if (this->texture == nullptr || this->texture->data == nullptr) {
         return Error(true,"Texture is null");
     }
-    if (scene == nullptr || scene->pixels == nullptr) {
+    if (scene == nullptr || scene->pixels== nullptr) {
         return Error(true,"Scene is null");
     }
     if (scene->window == nullptr) {
