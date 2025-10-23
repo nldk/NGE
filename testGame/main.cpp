@@ -211,7 +211,7 @@ int main(int argc, char *argv[]) {
     std::cout << argv[1] << std::endl;
     photoViewer(argv[1]);
     */
-    sandBoxGame();
+    //sandBoxGame();
     //leveltestSave();
     //leveltestLoad();
     return 0;

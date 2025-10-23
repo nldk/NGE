@@ -18,7 +18,7 @@ void Level::addSprite(Sprite *sprite) {
 }
 
 Error Level::loadLevel() {
-    std::ifstream file("config.json");
+    std::ifstream file(this->name+".json");
     if (!file.is_open()) {
         return Error(true, "Could not open config.json\n");
     }
@@ -87,7 +87,7 @@ void Level::saveLevel() {
             };
         }
     }
-    std::ofstream file(this->name);
+    std::ofstream file(this->name+".json");
     file << std::setw(4) << jsonLevel;
     file.close();
 }
