@@ -1,8 +1,8 @@
 # Ignore engine SDL libraries from language stats
-engine/SDL/include/* linguist-vendored
-engine/SDL_image/include/* linguist-vendored
-engine/SDL_mixer/include/* linguist-vendored
+engine/SDL/include/* linguist-detectable=false
+engine/SDL_image/include/* linguist-detectable=false
+engine/SDL_mixer/include/* linguist-detectable=false
 
 # Ignore release directories
-release/* linguist-vendored
-release-headers/* linguist-vendored
+release/* linguist-detectable=false
+release-headers/* linguist-detectable=false
