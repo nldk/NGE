@@ -7,12 +7,13 @@
 
 #include "renderer.h"
 
-Sprite::Sprite(std::string name,Texture* texture, float x, float y, int width, int height) {
+Sprite::Sprite(std::string name,Texture* texture, float x, float y, int width, int height,int group) {
     this->name = name;
     this->texture = texture;
     this->pos = Vec2(x, y);
     this->width = width;
     this->height = height;
+    this->group = group;
 }
 
 Error Sprite::drawSprite(Scene* scene) const {

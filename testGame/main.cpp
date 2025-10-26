@@ -201,7 +201,53 @@ void soundTest() {
     SDL_Delay(10000);
 }
 
+void col() {
+    bool running = true;
+    bool hitTheGround = false;
+    Frame frame = Frame();
+    EventHandeler eventHandeler = EventHandeler();
+    Window win = Window(WIDTH, HEIGHT, "Col");
+    Scene scene = Scene(&win, Color(0, 0, 0, win.screen->format), WIDTH, HEIGHT);
+    Camera camera = Camera(0, 0, WIDTH, HEIGHT, &scene);
+    Texture textureA = Texture();
+    textureA.load("../testGame/textures/pipe.png");
+    Texture textureB = Texture();
+    textureB.load("../testGame/textures/padel.png");
+    Sprite spriteA = Sprite("A", &textureA, 150, 50, 50, 50);
+    Sprite spriteB = Sprite("B", &textureB, 150, 150, 200, 50);
+    spriteA.onColide = [&hitTheGround](Sprite* other) {
+        if (other->name == "B") {
+            hitTheGround = true;
+        }
+    };
+    eventHandeler.onQuit = [&running]() {
+        running = false;
+        exitRenderer();
+    };
+    eventHandeler.sprites = {&spriteA, &spriteB};
+    while (running) {
+        eventHandeler.update();
+        eventHandeler.updateCollisions();
+        if (!hitTheGround) {
+            spriteA.moveInScene(spriteA.pos.x, spriteA.pos.y + 4, &scene);
+        }else {
+            hitTheGround = false;
+        }
+        if (eventHandeler.isKeyPressed(SDL_SCANCODE_A)) {
+            spriteA.moveInScene(spriteA.pos.x - 4, spriteA.pos.y, &scene);
+        }
+        if (eventHandeler.isKeyPressed(SDL_SCANCODE_D)) {
+            spriteA.moveInScene(spriteA.pos.x + 4, spriteA.pos.y, &scene);
+        }
+        spriteA.drawSprite(&scene);
+        spriteB.drawSprite(&scene);
+        frame = camera.render();
+        win.update(frame, 16);
+    }
+}
+
 int main(int argc, char *argv[]) {
+    col();
     //soundTest();
     /*
     if (argc < 2) {

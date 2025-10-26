@@ -25,13 +25,14 @@ public:
 
 class Sprite {
 public:
+  int group;
   std::string name;
   std::function<void(Sprite*)> onColide;
   Vec2 pos;
   int width;
   int height;
   Texture* texture;
-  Sprite(std::string name,Texture* texture, float x, float y, int width, int height);
+  Sprite(std::string name,Texture* texture, float x, float y, int width, int height,int group = 0);
   ~Sprite() = default;
   void onClolission(Sprite* other) {
     if (onColide) onColide(other);
