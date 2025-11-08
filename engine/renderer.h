@@ -1,13 +1,25 @@
 #ifndef NGE_RENDERER_H
 #define NGE_RENDERER_H
+#include <functional>
 #include <string>
 #include <SDL2/SDL.h>
-
+#include <vector>
 #include "color.h"
 #include "vec2.h"
 
 void exitRenderer();
-
+class GameLoop{
+public:
+    std::vector<std::function<void(float delta)>> callbacks;
+    void start();
+    void start(std::function<void(float delta)> callback);
+    void addUpdatFunc(std::function<void(float delta)> callback);
+    void stop();
+private:
+    Uint32 lastTime;
+    void loop();
+    bool running = false;
+};
 class Frame {
 public:
     Uint32* pixels = nullptr;

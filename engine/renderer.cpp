@@ -87,3 +87,28 @@ void exitRenderer() {
     IMG_Quit();
     SDL_Quit();
 }
+
+void GameLoop::start(){
+    if (!this->callbacks.empty()){
+        this->running = true;
+        this->loop();
+    }
+    return;
+}
+void GameLoop::addUpdatFunc(std::function<void(float delta)> callback){
+    this->callbacks.push_back(callback);
+}
+
+void GameLoop::loop(){
+    while (this->running){
+        int deltaTime = SDL_GetTicks() - lastTime;
+        for (auto update : this->callbacks){
+            update(deltaTime);
+        }
+        this->lastTime = SDL_GetTicks();
+    }
+}
+
+void GameLoop::stop(){
+    this->running = false;
+}

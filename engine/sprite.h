@@ -37,10 +37,10 @@ public:
   void onClolission(Sprite* other) {
     if (onColide) onColide(other);
   };
-  Error drawSprite(Scene* scene) const;
+  virtual Error drawSprite(Scene* scene) const;
   bool boxCollide(Sprite* sprite);
   bool boxCollide(int x, int y, int w, int h);
-  void move(float x, float y);
+  virtual void move(float x, float y);
   Error moveInScene(float x, float y, Scene* scene);
   void setOnCollision(std::function<void(Sprite*)> func) {
     this->onColide = func;

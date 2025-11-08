@@ -17,6 +17,8 @@ add_library(NGE STATIC
         engine/eventHandeling.cpp
         engine/sound.cpp
         engine/button.cpp
+        engine/text.cpp
+        engine/text.h
 )
 
 # --- Include your engine and SDL headers ---
