@@ -1,3 +1,4 @@
 # Ignore release directories
 engine/miniz.h linguist-generated=true
 engine/miniz.c linguist-generated=true
+*.h linguist-language=C++
